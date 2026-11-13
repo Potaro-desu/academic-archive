@@ -1,0 +1,80 @@
+ACADEMIC ARCHIVING SYSTEM - START HERE (v1.3)
+================================================
+
+Run this in 5 minutes on XAMPP or Laragon (Windows).
+
+1. EXTRACT
+   Put the folder "academic-archiving-system" in C:\xampp\htdocs\
+   (or C:\laragon\www\ for Laragon).
+
+2. START THE SERVICES
+   XAMPP Control Panel: start Apache and MySQL.
+   Laragon: start Apache and MySQL.
+
+3. IMPORT THE DATABASE (run each file ONCE, in this order)
+   Open phpMyAdmin (http://localhost/phpmyadmin) or HeidiSQL, then import:
+     a) database/schema.sql    (creates the academic_archiving database + tables)
+     b) database/seeds.sql     (demo accounts + 3 sample records)
+   If you already have a v1.1 database, import database/migrate-v1.2.sql
+   instead of schema.sql - it adds the favorites table, the download
+   count column, and the login lockout columns. Run it once; a second
+   run gives a harmless "Duplicate column name" error you can ignore.
+
+4. ADD THE DEMO FILES (run once)
+   Open a terminal in the project folder and run:
+     php database/seed_files.php
+   This creates 10 real demo files (PDF, PNG, audio, video, Word, PowerPoint)
+   and matching records, including one private file, one pending file, and
+   one returned file with feedback. It skips any title that already exists,
+   so running it twice is safe.
+
+5. CHECK THE SETTINGS
+   Open config/database.php and confirm host, database, username, password.
+   Defaults: 127.0.0.1, academic_archiving, root, empty password.
+
+6. OPEN THE SITE
+   http://localhost/academic-archiving-system/
+
+V1.3 VISUAL UPDATE
+  No database schema change is included. Do not re-import the database,
+  run a migration, or rerun seed scripts just for this update.
+  Anime.js 4.5.0 and the DM Sans and Manrope variable fonts are included
+  locally. No CDN is needed for the interface motion or fonts.
+
+DEMO ACCOUNTS (all use password ArchiveDemo2026!)
+  Admin / College Clerk : admin@college.edu
+  Student               : student@college.edu
+  Faculty               : faculty@college.edu
+
+QUICK CHECKS (do these first)
+  - Log in as admin, open the dashboard, approve the pending student record.
+  - Log out, search the public catalog for "PHP" - the approved record appears.
+  - As a visitor, try opening a private record - you should get 403 Forbidden.
+  - As the student, open My Submissions - the approved record shows a
+    notification on the dashboard.
+
+WHAT CHANGED IN v1.2 (v1.1 had edit/delete, sort/filters, feedback-required,
+admin publish checkbox, notifications, JSON search, and the docs)
+  - Catalog is now a card grid with real image thumbnails and labelled
+    colour tiles; 3 columns on desktop, 2 on tablet, 1 on phones.
+  - Favorites: star any record you can open, see it in My favorites.
+  - Download counts on every record and in the admin dashboard totals.
+  - Submit and review now work over fetch (loading / success / error
+    states); the plain forms still work with JavaScript off.
+  - My Submissions is its own page with sort, visibility, and favorites
+    filters. Admins get an audit log page (admin-audit.php).
+  - Login lockout: 5 failed sign-ins lock an account for 15 minutes.
+  - File content is checked against its extension (MIME type), so a
+    renamed file is rejected. Academic year must be YYYY-YYYY.
+  - Link records show their destination domain on the detail page.
+  - New docs: docs/wireframes/mobile-wireframe.png (phone layout).
+
+WHAT CHANGED IN v1.3
+  - Admin, faculty, and student dashboards have distinct ISPSC role looks.
+  - Shared gold keyboard focus, responsive polish, and optional Anime.js motion.
+  - Anime.js and the two variable fonts are hosted in the project.
+  - No database migration or re-import is required.
+
+MORE HELP
+  README.md has the full install, demo accounts, security notes, and checklist.
+  docs/FLOWS.md explains the three main workflows and who can do what.

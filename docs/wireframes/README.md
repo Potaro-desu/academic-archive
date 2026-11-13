@@ -1,0 +1,3 @@
+# Mobile wireframe
+
+`mobile-wireframe.png` is a drawn wireframe of the two main screens at 360 px wide: the public catalog (phone 1) and a resource detail page (phone 2). It shows the header with the hamburger menu, the search bar and filter chips, the one-column card grid with image thumbnails and labelled colour tiles, and on the detail screen the back link, status badge, preview area, Download and Add to favorites buttons, the metadata list, and the admin review panel. The side notes list what to check on a phone: no sideways scroll, thumb-usable filters, and the keyboard focus outline. The live pages are `index.php` (catalog) and `view-resource.php` (detail); the wireframe is a layout guide, not a screenshot.

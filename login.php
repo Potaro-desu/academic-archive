@@ -1,0 +1,4 @@
+<?php require_once __DIR__.'/config/bootstrap.php'; if(current_user()) redirect('dashboard.php'); render_header('Sign in'); ?>
+<main id="main" class="auth-page"><section class="auth-card"><p class="eyebrow">WELCOME BACK</p><h1>Sign in to the ISPSC archive</h1><p class="muted">Access your submissions and Sta. Maria campus archive tools.</p>
+<form action="api/auth.php" method="post" class="stack-form"><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><input type="hidden" name="action" value="login"><label>Email address<input type="email" name="email" required autocomplete="username" maxlength="190"></label><label>Password<input type="password" name="password" required autocomplete="current-password"></label><button class="button button-primary button-wide" type="submit">Sign in</button></form>
+<p class="auth-foot">New to the archive? <a href="register.php">Create a student or faculty account</a>.</p></section></main><?php render_footer(); ?>

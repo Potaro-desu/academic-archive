@@ -1,0 +1,92 @@
+# UI audit, v1.2 baseline
+
+## Scope and baseline
+
+The audit was performed against the running Laragon copy at
+`http://localhost/academic-archiving-system/` before v1.3 changes. The supplied
+demo database is available with 3 accounts and 11 records. The public catalog,
+login, and admin dashboard loaded successfully. The admin demo account logged
+in successfully and exposed the existing role-specific dashboard navigation.
+The browser reported a failed Google Fonts request while offline.
+
+The project has no prior live-check report or reproducible 100/100 score
+artifact. The v1.2 README documents the behaviors, but not a numeric score.
+Screenshots in `docs/screenshots/` are existing v1.2 examples, not evidence of
+the requested per-role v1.3 checks.
+
+## Files and current UI responsibilities
+
+| File | Current responsibility | v1.3 change |
+|---|---|---|
+| `assets/css/style.css` | Shared tokens, typography, header, forms, cards, tables, responsive rules | Local fonts, shared spacing/focus/interaction/reduced-motion polish |
+| `assets/css/campus.css` | ISPSC tokens, role buttons and heroes, stats, dashboard menus and role sections | Admin, faculty, and student visual systems; remove the dashboard-menu keyframe |
+| `assets/css/home.css` | Public catalog, search form, shortcuts, and resource cards | Keep the public layout and visuals, use shared polish only |
+| `assets/js/app.js` | Navigation, role menu, async catalog search, submit and review forms | Guarded Anime.js motion and reduced-motion handling |
+| `assets/vendor/anime/anime.umd.min.js` | Not present at baseline | Vendor Anime.js 4.5.0 locally |
+| `assets/fonts/` | Not present at baseline | Locally serve DM Sans and Manrope variable fonts with licenses |
+| `config/bootstrap.php` | Session/backend helpers, shared header/footer and asset tags | Only cache-busted UI asset tags and the v1.3 footer marker |
+| `index.php` | Public catalog and search filters | No role styling or structural change |
+| `login.php`, `register.php` | Public authentication forms | Shared polish only |
+| `dashboard.php` | Role-specific dashboard data, menus, stats and sections | Reorder role sections and adjust faculty review list markup |
+| `my-submissions.php` | Signed-in user's submissions, filters and statuses | Role-aware presentation and motion data attributes |
+| `submit.php`, `edit.php` | Existing resource forms and validation markup | Role-aware presentation and submit motion hooks |
+| `view-resource.php` | Detail, preview, favorite and review controls | Preview and favorite motion hooks |
+| `admin-users.php`, `admin-audit.php` | Admin directory and audit tables | Admin presentation only |
+| `README.md`, `START-HERE.txt` | Project setup and feature notes | Version, local Anime.js and no-migration notes |
+| `docs/FLOWS.md` | Existing workflows and permission matrix | Update version and describe the dashboard order |
+| `docs/ROLE-LOOKS-v1.3.md` | Not present at baseline | Document the three visual systems |
+| `docs/ANIMATIONS.md` | Not present at baseline | Document motion map, fallback and reduced motion |
+| `docs/LIVE-CHECK-v1.3.md` | No prior live-check report found | Record actual results and limits |
+| `docs/screenshots/` | Existing v1.2 screenshots | Add v1.3 per-role responsive evidence where capture is supported |
+
+No source or configuration file was changed during this audit.
+
+## Shared baseline
+
+- The white sticky header, ISPSC seal and navigation are shared.
+- Public catalog, details, login and registration use the same visual system.
+- Status badges use the same shared classes.
+- The gold keyboard outline already exists for controls.
+- The footer reports v1.2.
+- The public catalog already has responsive card layouts and image thumbnails.
+- The CSS imports Manrope and DM Sans from Google Fonts, which creates a failed
+  network request in the offline browser.
+- The stylesheet contains short transitions, including card hover and menu
+  chevron transitions.
+- `campus.css` contains one `dashboard-menu-in` keyframe animation.
+
+## Role baseline
+
+- Admin: a pale hero with a red accent; admin buttons are red. Archive stats
+  precede the review queue. User directory and audit log are available from the
+  role menu and separate admin pages.
+- Faculty: a pale green hero and green button; the student review queue is a
+  dense table, followed by contributions and campus picks.
+- Student: a pale yellow hero and yellow button; submission stats precede
+  coursework, with the three-step guide at the end.
+- Role menu contents already differ by role. Shared notifications and favorites
+  currently precede each role's main dashboard sections.
+
+## Baseline verification notes
+
+- The local public archive and admin login were exercised in the browser.
+- The demo data contained pending, returned and approved records, suitable for
+  visual review without changing the database.
+- No baseline screenshots were generated by this audit. The existing images
+  were not relabeled as v1.3 evidence.
+- The 360px role-specific screenshots and behavior checks belong to the final
+  validation stage.
+
+## v1.3 verification
+
+The final live checks are recorded in [LIVE-CHECK-v1.3.md](./LIVE-CHECK-v1.3.md).
+All 30 checks passed, including syntax validation, the three demo roles, role
+section order, mobile overflow, local font loading, search, form-type switching,
+reduced motion, and the Anime.js fallback. The screenshots in
+`docs/screenshots/v1.3/` are new v1.3 captures; the earlier screenshots remain
+unaltered.
+
+The role sections now follow the requested DOM order as well as visual order.
+The dashboard data queries, forms, permission checks, APIs, and database schema
+were not changed. No submission, favorite, review, or download data was
+modified during validation.
