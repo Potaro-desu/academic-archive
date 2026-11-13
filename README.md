@@ -164,7 +164,7 @@ The implementation follows the supplied project brief: responsive public discove
 |---|---|
 | Group name | To be confirmed |
 | Section | To be confirmed |
-| Members | To be confirmed |
+| Members | Jasten Cabacungan, Sharmine Casandig, John Lester Tuzon |
 | Dates | To be confirmed |
 | Git repository | To be confirmed |
 | Deployment link | To be confirmed |
